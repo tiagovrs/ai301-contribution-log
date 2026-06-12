@@ -1,15 +1,17 @@
-# Contribution [#]: [Issue Title]
+# Contribution 1: Add a way of public view as member role (or similar)
 
-**Contribution Number:** [1 / 2 / 3]  
-**Student:** [Your Name]  
-**Issue:** [GitHub issue link]  
-**Status:** [Phase I / Phase II / Phase III / Phase IV] [In Progress / Complete]
+**Contribution Number:** 1  
+**Student:** Tiago  
+**Issue:** https://github.com/bluewave-labs/checkmate/issues/2751  
+**Status:** Phase I Complete
 
 ---
 
 ## Why I Chose This Issue
 
-[1-2 paragraphs explaining why this issue interests you, how it matches your skills/learning goals, what you hope to learn]
+Checkmate is an open-source uptime/monitoring dashboard, and issue #2751 asks for a way to share a "public view" — a visitor role that can browse the dashboard and monitoring data without being able to change anything. Today the closest thing is the `demo` role, but it carries artificial restrictions (it can't be deleted, can't be assigned through the edit-user form, and isn't reachable via the normal invite flow) that keep it from serving as a real public viewer. The fix is to relax those unnecessary restrictions so the role behaves like a proper read-only member, while keeping every write operation (creating/editing monitors, managing team members) firmly blocked.
+
+I chose this issue because it sits right in the role-based access control (RBAC) layer, which is something I want to understand deeply, and because the change is specific and bounded rather than a broad refactor. Checkmate enforces roles at four layers — the Mongoose schema enum, JWT middleware, the service layer, and client-side Joi validation — so working through it means tracing one concept cleanly from the database model up to the React/Redux UI. The codebase already has clear conventions to match (the existing four-role system and `canManageRole` logic), the affected files are well-scoped, and the security-sensitive nature of the change makes it a good exercise in reasoning carefully about what a user can *do* versus what they can *see*. I hope to come away more comfortable with full-stack permission systems and with contributing to an established open-source project's contribution workflow.
 
 ---
 
